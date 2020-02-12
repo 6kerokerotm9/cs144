@@ -89,18 +89,25 @@ BigUInt& BigUInt::operator+=(const BigUInt& rhs) {
 	}
     
     if(carry == 1) { //for the end result if there still is a carried 1 then set a new digit
-        longest++; //add one extra space in the end of the number for the carried digit
+        length++; //add one extra space in the end of the number for the carried digit
+        data = new unsigned char[length];
+        data[length-1] = 1;
     }
-    data = new unsigned char[longest];
-    length = longest;
+    else {
+        length = longest;
+        data = new unsigned char[length];
+    }
     for(int l=0; l<longest; l++) { //copies the data into the the new data 
-		if(carry == 1 && l+1 == longest) { //if a carry is required append the 1 at the end of the array
-            data[l] = 1;
-        }
-        else{
-            data[l] = temp[l];
-        }
-        //cout << static_cast<int>(data[l]) << endl;
+        data[l] = temp[l];
 	}
 	return *this;
 }
+
+ostream& operator<<(ostream&os, const BigUInt& b) {
+    for(int i=b.length-1; i>=0; i--) {
+        os << static_cast<int>(b.data[i]);
+    }
+    os << endl;
+    return os;
+}
+
