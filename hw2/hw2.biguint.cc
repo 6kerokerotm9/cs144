@@ -1,3 +1,9 @@
+/*
+Joshua Sjah
+CS 144
+This file implements the class described in the header file by providing 
+implementation for the member functions and the friend functions declared 
+*/
 #include "hw2.biguint.h"
 #include <cmath>
 
@@ -40,6 +46,7 @@ void BigUInt::TimesTenPow(unsigned int p) {
 	for(int j=0; j<length; j++) { //fills the rest of the number with the original number
 		temp[j+p] = data[j];
 	}
+	delete []data;
 	length += p; //extends the length of the member variable
 	data = new unsigned char[length+p]; //creates a new data field with new length
 	for(int k=0; k<(length+p); k++) { //copies the data into the the new data 
@@ -61,7 +68,7 @@ BigUInt& BigUInt::operator+=(const BigUInt& rhs) {
     unsigned char lhsTemp[longest];
     
     for(int i=0; i<longest; i++) { //uses loop to set arrays to same lengths
-        if(i >= length) {
+        if(i >= rhs.length) {
             rhsTemp[i] = 0; //compensate for the the rest of the number by filling it with zeroes
         }
         else {
@@ -88,6 +95,7 @@ BigUInt& BigUInt::operator+=(const BigUInt& rhs) {
         }
 	}
     
+    delete []data;
     if(carry == 1) { //for the end result if there still is a carried 1 then set a new digit
         length++; //add one extra space in the end of the number for the carried digit
         data = new unsigned char[length];
