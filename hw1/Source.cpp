@@ -3,7 +3,6 @@ Joshua Sjah
 CS 144
 This program creates a class that emulates a rational fraction
 with functions that operate on the rational numbers
-test test test
 */
 
 #include <iostream>
